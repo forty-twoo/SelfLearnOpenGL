@@ -1,2 +1,2 @@
 # SelfLearnOpenGL
-Follow the tutorial Learn OpenGL and do some exercise 
+Follow the tutorial 《LearnOpenGL》 and do some exercise.
