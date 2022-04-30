@@ -3,6 +3,11 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <shader_s.h>
+
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 #include <iostream>
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
@@ -59,6 +64,7 @@ int main()
         0, 1, 3,
         1, 2, 3
     };
+
 
 
     unsigned int VAO;
@@ -128,6 +134,8 @@ int main()
     glUniform1i(glGetUniformLocation(myShader.ID, "myTexture0"), 0);
     glUniform1i(glGetUniformLocation(myShader.ID, "myTexture1"), 1);
 
+
+
     // render loop
     // -----------
     while (!glfwWindowShouldClose(window))
@@ -144,17 +152,31 @@ int main()
 
         myShader.use();
 
+        // Add transformation to show some effect,the matrix multiplation DOES matters!
+        glm::mat4 trans = glm::mat4(1.0f);
+        trans = glm::translate(trans, glm::vec3(0.3f, -0.3f, 0.f));
+        
+        float scaleAmount = static_cast<float>(sin(glfwGetTime()));
+        trans = glm::scale(trans, glm::vec3(abs(scaleAmount), abs(scaleAmount), 1.f));
+        glUniformMatrix4fv(glGetUniformLocation(myShader.ID, "transMatrix"), 1, GL_FALSE, glm::value_ptr(trans));
+
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D,text_container);
 
         glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, text_face);
 
-        
-
         glBindVertexArray(VAO);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
+        //Another object
+        trans = glm::mat4(1.0f);
+        trans = glm::translate(trans, glm::vec3(-0.3f, 0.3f, 0.f));
+        trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
+        trans = glm::scale(trans, glm::vec3(0.5f, 0.5f, 1.f));
+        glUniformMatrix4fv(glGetUniformLocation(myShader.ID, "transMatrix"), 1, GL_FALSE, glm::value_ptr(trans));
+
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
