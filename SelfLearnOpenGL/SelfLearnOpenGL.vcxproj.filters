@@ -37,10 +37,16 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="shader.vs">
+    <None Include="cube_object.fs">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="shader.fs">
+    <None Include="cube_object.vs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="light_source.vs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="light_source.fs">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
