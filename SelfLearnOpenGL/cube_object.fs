@@ -1,9 +1,9 @@
 #version 330 core
 
 struct Material{
-	vec3 diffuse;
-	vec3 specular;
-	vec3 ambient;
+	sampler2D diffuse;
+	sampler2D specular;
+	sampler2D emission;
 	float shininess;
 };
 
@@ -18,9 +18,11 @@ uniform Material material;
 uniform Light light;
   
 uniform vec3 viewPos;
+uniform float time;
 
 in vec3 Norm;
 in vec3 FragPos;
+in vec2 TextCoors;
 out vec4 FragColor;
 
 void main()
@@ -36,10 +38,17 @@ void main()
 	vec3 reflectlight=normalize(reflect(-lightDir,Norm));
 	float spec=pow(max(dot(reflectlight,viewDir),0.0f),128);
 
-	vec3 ambient=material.ambient*light.ambient;
-	vec3 diffuse=diff*material.diffuse*light.diffuse;
-	vec3 specular=spec*material.specular*light.specular;
+	
+	vec3 emission=vec3(0.0);
+	vec3 ambient=light.ambient*vec3(texture(material.diffuse,TextCoors));
+	vec3 diffuse=diff*light.diffuse*vec3(texture(material.diffuse,TextCoors));
+	vec3 specular=spec*light.specular*vec3(texture(material.specular,TextCoors));
+	if(texture(material.specular,TextCoors).r==0.0){
+		//emission=texture(material.emission,TextCoors).rgb;
+		emission=texture(material.emission,TextCoors+vec2(0.0,time)).rgb;
+		emission=emission*(sin(time)+1.0f);
+	}
 
-	FragColor=vec4(ambient+diffuse+specular,1.0);
+	FragColor=vec4(ambient+diffuse+specular+emission,1.0f);
 
 }
