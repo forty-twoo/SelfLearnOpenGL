@@ -29,14 +29,14 @@ float deltaTime = 0.0f;	// time between current frame and last frame
 float lastFrame = 0.0f;
 
 //camera
-Camera camera(glm::vec3(1.0f, 0.7f, 5.0f));
+Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 float lastX = SCR_WIDTH / 2.0f;
 float lastY = SCR_HEIGHT / 2.0f;
 bool firstMouse = true;
 
 //lighting
 float lightRadius = 3.f;
-glm::vec3 lightPos(0.f, 0.0f, 0.f);
+glm::vec3 lightPos(3.f, 3.0f, 0.f);
 glm::vec3 lightColor(0.945, 0.905, 0.294);
 
 int main()
@@ -192,7 +192,7 @@ int main()
 
         glm::vec3 lightColor;
         lightColor = glm::vec3(1.0f);
-        glm::vec3 diffuseColor = lightColor   * glm::vec3(0.6f); // decrease the influence
+        glm::vec3 diffuseColor = lightColor   * glm::vec3(0.8f); // decrease the influence
         glm::vec3 ambientColor = diffuseColor * glm::vec3(0.2f); // low influence
 
         cubeShader.use();
@@ -200,15 +200,23 @@ int main()
         cubeShader.setVec3("light.diffuse", diffuseColor);
         cubeShader.setVec3("light.specular", 1.0f, 1.0f, 1.0f);
 
-        cubeShader.setVec3("light.position", lightPos);
+        cubeShader.setVec3("light.position", camera.Position);
+        cubeShader.setVec3("light.direction", camera.Front);
+        cubeShader.setFloat("light.cutOff", glm::cos(glm::radians(12.5f)));
+        cubeShader.setFloat("light.outerCutOff", glm::cos(glm::radians(17.5)));
+        cubeShader.setFloat("light.constant", 1.0f);
+        cubeShader.setFloat("light.linear", 0.09f);
+        cubeShader.setFloat("light.quadratic", 0.032f);
+        
+
         cubeShader.setFloat("material.shininess", 32.f);
+
 
         glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / SCR_HEIGHT, 0.1f, 100.f);
         glm::mat4 view = camera.GetViewMatrix();
         cubeShader.setMat4("projection", projection);
         cubeShader.setMat4("view", view);
 
-        //model = glm::rotate(model, glm::radians( 20.f), glm::normalize(glm::vec3(0.5f, 1.0f, 0.0f)));
         cubeShader.setVec3("viewPos", camera.Position);
 
         glActiveTexture(GL_TEXTURE0);
@@ -231,6 +239,7 @@ int main()
 
         }
 
+        /*
         lightShader.use();
         model = glm::mat4(1.0f);
         model = glm::translate(model, lightPos);
@@ -244,6 +253,7 @@ int main()
 
         glBindVertexArray(lightVAO);
         glDrawArrays(GL_TRIANGLES, 0, 36);
+        */
 
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
