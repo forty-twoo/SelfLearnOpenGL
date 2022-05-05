@@ -35,8 +35,8 @@ float lastY = SCR_HEIGHT / 2.0f;
 bool firstMouse = true;
 
 //lighting
-float lightRadius = 2.f;
-glm::vec3 lightPos(lightRadius, 0.0f, 3.f);
+float lightRadius = 3.f;
+glm::vec3 lightPos(0.f, 0.0f, 0.f);
 glm::vec3 lightColor(0.945, 0.905, 0.294);
 
 int main()
@@ -127,6 +127,19 @@ int main()
         -0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 0.0f,
         -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 1.0f
     };
+        // positions all containers
+    glm::vec3 cubePositions[] = {
+        glm::vec3( 0.0f,  0.0f,  0.0f),
+        glm::vec3( 2.0f,  5.0f, -15.0f),
+        glm::vec3(-1.5f, -2.2f, -2.5f),
+        glm::vec3(-3.8f, -2.0f, -12.3f),
+        glm::vec3( 2.4f, -0.4f, -3.5f),
+        glm::vec3(-1.7f,  3.0f, -7.5f),
+        glm::vec3( 1.3f, -2.0f, -2.5f),
+        glm::vec3( 1.5f,  2.0f, -2.5f),
+        glm::vec3( 1.5f,  0.2f, -1.5f),
+        glm::vec3(-1.3f,  1.0f, -1.5f)
+    };
     unsigned int VBO,cubeVAO;
     glGenVertexArrays(1, &cubeVAO);
     glGenBuffers(1, &VBO);
@@ -153,12 +166,10 @@ int main()
 
     unsigned int diffuseMap = loadTexture("container2.png");
     unsigned int specularMap = loadTexture("container2_specular.png");
-    unsigned int emissionMap = loadTexture("matrix.jpg");
 
     cubeShader.use();
     cubeShader.setInt("material.diffuse", 0);
     cubeShader.setInt("material.specular", 1);
-    cubeShader.setInt("material.emission", 2);
 
 
     // render loop
@@ -177,9 +188,6 @@ int main()
         glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT |GL_DEPTH_BUFFER_BIT);
 
-        float cur_time =2.f* (float)glfwGetTime();
-        lightPos.x = lightRadius * cos(cur_time);
-        lightPos.z = lightRadius * sin(cur_time);
 
 
         glm::vec3 lightColor;
@@ -200,31 +208,33 @@ int main()
         cubeShader.setMat4("projection", projection);
         cubeShader.setMat4("view", view);
 
-        glm::mat4 model = glm::mat4(1.0f);
-        model = glm::rotate(model, glm::radians((float)glfwGetTime() * 20.f), glm::normalize(glm::vec3(0.5f, 1.0f, 0.0f)));
         //model = glm::rotate(model, glm::radians( 20.f), glm::normalize(glm::vec3(0.5f, 1.0f, 0.0f)));
-        glm::mat3 normatrix = glm::mat3(glm::transpose(glm::inverse(model)));
-        cubeShader.setMat4("model", model);
-        cubeShader.setMat3("normatrix", normatrix);
         cubeShader.setVec3("viewPos", camera.Position);
-        cubeShader.setFloat("time", (float)glfwGetTime());
 
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, diffuseMap);
         glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, specularMap);
-        glActiveTexture(GL_TEXTURE2);
-        glBindTexture(GL_TEXTURE_2D, emissionMap);
-        
 
         glBindVertexArray(cubeVAO);
-        glDrawArrays(GL_TRIANGLES, 0, 36);
 
+        glm::mat4 model;
+        for (unsigned int i = 0; i < 10; i++) {
+            model = glm::mat4(1.0f);
+            model = glm::translate(model, cubePositions[i]);
+            float angle = 20.0f * i;
+            model = glm::rotate(model, glm::radians((float)glfwGetTime()*30.f), glm::normalize(cubePositions[i]));
+            cubeShader.setMat4("model", model);
+            glm::mat3 normatrix = glm::mat3(glm::transpose(glm::inverse(model)));
+            cubeShader.setMat3("normatrix", normatrix);
+            glDrawArrays(GL_TRIANGLES, 0, 36);
+
+        }
 
         lightShader.use();
         model = glm::mat4(1.0f);
         model = glm::translate(model, lightPos);
-        model = glm::scale(model, glm::vec3(0.05f));
+        model = glm::scale(model, glm::vec3(0.3f));
         //model = glm::rotate(model, glm::radians((float)glfwGetTime()*30.f), glm::vec3(0.0f, 1.0f, 0.0f));
 
         //lightShader.setVec3("lightColor", lightColor);
