@@ -24,9 +24,6 @@
     <ClCompile Include="camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="model_loading.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stb_image.h">
@@ -56,6 +53,12 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="light_source.fs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="model_loading.vs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="model_loading.fs">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

@@ -146,7 +146,6 @@
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="model_loading.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="camera.h" />
@@ -160,6 +159,8 @@
     <None Include="light_source.vs" />
     <None Include="cube_object.fs" />
     <None Include="cube_object.vs" />
+    <None Include="model_loading.fs" />
+    <None Include="model_loading.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
