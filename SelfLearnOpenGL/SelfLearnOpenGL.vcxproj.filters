@@ -61,5 +61,14 @@
     <None Include="model_loading.fs">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="stencil_testing.vs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="stencil_testing.fs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="single_color.fs">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

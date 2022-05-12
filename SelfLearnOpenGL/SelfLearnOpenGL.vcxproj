@@ -161,6 +161,9 @@
     <None Include="cube_object.vs" />
     <None Include="model_loading.fs" />
     <None Include="model_loading.vs" />
+    <None Include="single_color.fs" />
+    <None Include="stencil_testing.fs" />
+    <None Include="stencil_testing.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
