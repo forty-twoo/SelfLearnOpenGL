@@ -70,5 +70,11 @@
     <None Include="single_color.fs">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="blending.vs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="blending.fs">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
