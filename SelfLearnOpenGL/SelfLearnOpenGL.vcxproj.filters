@@ -61,5 +61,29 @@
     <None Include="model_loading.fs">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="framebuffers.vs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="framebuffers.fs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="framebuffers_screen.vs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="framebuffers_screen.fs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="skybox.vs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="skybox.fs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="cubemaps.vs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="cubemaps.fs">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
