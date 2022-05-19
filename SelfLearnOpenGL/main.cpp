@@ -262,8 +262,6 @@ int main()
         glDrawArrays(GL_TRIANGLES, 0, 36);
         glBindVertexArray(0);
 
-        //glDepthMask(GL_FALSE);
-        //glDepthMask(GL_TRUE);
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
