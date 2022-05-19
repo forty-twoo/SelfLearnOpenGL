@@ -1,11 +1,16 @@
 #version 330 core
 out vec4 FragColor;
 
-in vec2 TexCoords;
+in vec3 fragPos;
+in vec3 Norm;
 
-uniform sampler2D texture1;
+uniform vec3 camPos;
+uniform samplerCube skybox;
 
 void main()
 {    
-    FragColor = texture(texture1, TexCoords);
+	vec3 camDir=normalize(fragPos-camPos);
+	vec3 outDir=reflect(camDir,normalize(Norm));
+
+	FragColor=vec4(texture(skybox,outDir).rgb,1.0f);
 }
