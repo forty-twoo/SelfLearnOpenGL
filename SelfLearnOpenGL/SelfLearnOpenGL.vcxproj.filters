@@ -61,12 +61,6 @@
     <None Include="model_loading.fs">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="framebuffers.vs">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="framebuffers.fs">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="framebuffers_screen.vs">
       <Filter>Resource Files</Filter>
     </None>
@@ -83,6 +77,15 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="cubemaps.fs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="advanced_glsl.vs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="red.fs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="green.fs">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

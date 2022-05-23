@@ -155,18 +155,19 @@
     <ClInclude Include="stb_image.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="advanced_glsl.vs" />
     <None Include="cubemaps.fs" />
     <None Include="cubemaps.vs" />
-    <None Include="framebuffers.fs" />
-    <None Include="framebuffers.vs" />
     <None Include="framebuffers_screen.fs" />
     <None Include="framebuffers_screen.vs" />
+    <None Include="green.fs" />
     <None Include="light_source.fs" />
     <None Include="light_source.vs" />
     <None Include="cube_object.fs" />
     <None Include="cube_object.vs" />
     <None Include="model_loading.fs" />
     <None Include="model_loading.vs" />
+    <None Include="red.fs" />
     <None Include="skybox.fs" />
     <None Include="skybox.vs" />
   </ItemGroup>
