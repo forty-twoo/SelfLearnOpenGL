@@ -88,5 +88,14 @@
     <None Include="green.fs">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="geometry_shader.vs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="geometry_shader.fs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="geometry_shader.gs">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
