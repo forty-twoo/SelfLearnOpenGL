@@ -158,8 +158,6 @@
     <None Include="advanced_glsl.vs" />
     <None Include="cubemaps.fs" />
     <None Include="cubemaps.vs" />
-    <None Include="framebuffers_screen.fs" />
-    <None Include="framebuffers_screen.vs" />
     <None Include="geometry_shader.fs" />
     <None Include="geometry_shader.gs" />
     <None Include="geometry_shader.vs" />

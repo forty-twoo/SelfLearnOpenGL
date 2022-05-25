@@ -61,12 +61,6 @@
     <None Include="model_loading.fs">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="framebuffers_screen.vs">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="framebuffers_screen.fs">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="skybox.vs">
       <Filter>Resource Files</Filter>
     </None>

@@ -1,32 +1,42 @@
 #version 330 core
-layout (points) in;
-layout (triangle_strip,max_vertices=5) out;
+layout (triangles) in;
+layout (triangle_strip, max_vertices=3) out;
+
+uniform float time;
 
 in VS_OUT{
-	vec3 color;
+	vec2 textCoords;
 }gs_in[];
 
-out vec3 fColor;
+out vec2 TextCoords;
 
-void build_house(vec4 position )
+vec3 GetNormal()
 {
-	fColor=gs_in[0].color;
-	gl_Position=position+vec4(-0.2f,-0.2f,0.0f,0.0f);
-	EmitVertex();
-	gl_Position=position+vec4(0.2f,-0.2f,0.0f,0.0f);
-	EmitVertex();
-    gl_Position = position + vec4(-0.2,  0.2, 0.0, 0.0); // 3:top-left
-    EmitVertex();
-    gl_Position = position + vec4( 0.2,  0.2, 0.0, 0.0); // 4:top-right
-    EmitVertex();
-    gl_Position = position + vec4( 0.0,  0.4, 0.0, 0.0); // 5:top
-    fColor = vec3(1.0, 1.0, 1.0);
-    EmitVertex();
-    EndPrimitive();
+	vec3 a=vec3(gl_in[2].gl_Position)-vec3(gl_in[1].gl_Position);
+	vec3 b=vec3(gl_in[0].gl_Position)-vec3(gl_in[1].gl_Position);
+	return normalize(cross(b,a));
+}
 
+vec4 Explode(vec4 position,vec3 normal)
+{
+	vec3 direction=normal*((sin(time)+1.0)/2.0f)*2.0f;
+	return position+vec4(direction,0.0f);
 }
 
 void main()
 {
-	build_house(gl_in[0].gl_Position);
+	vec3 Normal=GetNormal();
+	gl_Position=Explode(gl_in[0].gl_Position,Normal);
+	TextCoords=gs_in[0].textCoords;
+	EmitVertex();
+
+	gl_Position=Explode(gl_in[1].gl_Position,Normal);
+	TextCoords=gs_in[1].textCoords;
+	EmitVertex();
+
+	gl_Position=Explode(gl_in[2].gl_Position,Normal);
+	TextCoords=gs_in[2].textCoords;
+	EmitVertex();
+
+	EndPrimitive();
 }
