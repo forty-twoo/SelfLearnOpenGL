@@ -20,8 +20,8 @@ unsigned int loadTexture(const char* path);
 unsigned int loadCubemap(vector<std::string> faces);
 
 // settings
-const unsigned int SCR_WIDTH = 1600;
-const unsigned int SCR_HEIGHT = 1200;
+const unsigned int SCR_WIDTH = 800;
+const unsigned int SCR_HEIGHT =600;
 
 // camera
 Camera camera(glm::vec3(0.0f, 6.0f, 6.0f));
@@ -76,8 +76,10 @@ int main()
     // configure global opengl state
     // -----------------------------
     glEnable(GL_DEPTH_TEST);
+    //glEnable(GL_FRAMEBUFFER_SRGB);
 
-    Shader shader("geometry_shader.vs", "geometry_shader.fs", "geometry_shader.gs");
+    //Shader shaderDefault("default.vs", "default.fs");
+    //Shader shaderNormal("geometry_shader.vs", "geometry_shader.fs", "geometry_shader.gs");
 
     // load models
     // -----------
@@ -102,19 +104,23 @@ int main()
 
         // render
         // ------
-        glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
+        glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+        /*
         glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 1.0f, 100.0f);
         glm::mat4 view = camera.GetViewMatrix();
         glm::mat4 model = glm::mat4(1.0f);
-        shader.use();
-        shader.setMat4("projection", projection);
-        shader.setMat4("view", view);
-        shader.setMat4("model", model);
-        shader.setFloat("time", static_cast<float>(glfwGetTime()));
+        shaderDefault.use();
+        shaderDefault.setMat4("projection", projection);
+        shaderDefault.setMat4("view", view);
+        shaderDefault.setMat4("model", model);
+        nanosuit.Draw(shaderDefault);
         
-        nanosuit.Draw(shader);
+        
+
+        nanosuit.Draw(shaderNormal);
+        */
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
         glfwSwapBuffers(window);
