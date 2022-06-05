@@ -3,6 +3,8 @@ Follow the tutorial 《LearnOpenGL》 and do some exercises.
 
 ### Hints for me
 
+- Your NDC coordinates will then be transformed to screen-space coordinates via the viewport transform using the data you provided with glViewport. **The resulting screen-space coordinates are then transformed to fragments as inputs to your fragment shader.**
+
 - when you draw more than one objects, in order to make the normal vectors keep pointing at the right direction after the transformations, **you need to modify the normal matrix in the drawing loop every time you draw an object for the model matrix may change**, another solution is to calculate the normal matrix in vertex shader, but it will be slower.
 - **Cubemap**: OpenGL treats it like an unit box, if you don't use any fancy instructions you will see that the rendering result is a small box. You have  to disable depth test when draw cubemap as skybox, because cubemap is so tiny and much closer to the camera compared to other objects. And remember cubemap is a 3D texture which needs three dimension coordinates to identify. 
 - **Uniform Buffer Object**: If you have some uniform variables which won't change between several shaders, you can define them as uniform buffer object and only need to set them **once** in the OpenGL code. The way to use Uniform buffer object is a little different because you have to allocate the binding point which is a number  to every ubo. The binding points connect the shader and the ubo in GPU. One uniform buffer object can contain several variables so the function `glBufferSubData` will be used to copy the actual data to the buffer for it can define the exact offsets.
@@ -10,3 +12,5 @@ Follow the tutorial 《LearnOpenGL》 and do some exercises.
 - **Geometry shader input varying variable must be declared as an array.**
 - (?) I have one question in [Exploding objects](https://learnopengl.com/Advanced-OpenGL/Geometry-Shader), Joey used the cross-product to calculate the face normal, but the order of the two vectors he used will produce a direction vector pointing to the inside. But the final effect proved to be correct. I just can't understand that.
 - *I spent two days trying to understand Gamma-Correction, but failed. Maybe I should learn it after I know more about image processing.*
+
+- **I've been stucked in Shadow Mapping(real-time) for one week, then I decide to learn related lessons in Games202 for a while.——20.6.5**

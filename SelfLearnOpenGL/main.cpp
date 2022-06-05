@@ -78,8 +78,8 @@ int main()
     glEnable(GL_DEPTH_TEST);
     //glEnable(GL_FRAMEBUFFER_SRGB);
 
-    //Shader shaderDefault("default.vs", "default.fs");
-    //Shader shaderNormal("geometry_shader.vs", "geometry_shader.fs", "geometry_shader.gs");
+    Shader shaderDefault("default.vs", "default.fs");
+    Shader shaderNormal("geometry_shader.vs", "geometry_shader.fs", "geometry_shader.gs");
 
     // load models
     // -----------
