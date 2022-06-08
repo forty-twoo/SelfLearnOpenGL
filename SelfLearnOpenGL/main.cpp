@@ -20,8 +20,8 @@ unsigned int loadTexture(const char* path);
 unsigned int loadCubemap(vector<std::string> faces);
 
 // settings
-const unsigned int SCR_WIDTH = 800;
-const unsigned int SCR_HEIGHT =600;
+const unsigned int SCR_WIDTH = 1600;
+const unsigned int SCR_HEIGHT =1200;
 
 // camera
 Camera camera(glm::vec3(0.0f, 6.0f, 6.0f));
@@ -107,7 +107,6 @@ int main()
         glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        /*
         glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 1.0f, 100.0f);
         glm::mat4 view = camera.GetViewMatrix();
         glm::mat4 model = glm::mat4(1.0f);
@@ -117,10 +116,12 @@ int main()
         shaderDefault.setMat4("model", model);
         nanosuit.Draw(shaderDefault);
         
-        
-
+        shaderNormal.use();
+        shaderNormal.setMat4("projection", projection);
+        shaderNormal.setMat4("view", view);
+        shaderNormal.setMat4("model", model);
         nanosuit.Draw(shaderNormal);
-        */
+
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
         glfwSwapBuffers(window);

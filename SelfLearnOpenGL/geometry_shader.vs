@@ -13,5 +13,7 @@ out VS_OUT{
 
 void main()
 {
-	gl_Position=projection*view*model*vec4(aPos,1.0f);
+	mat3 normalMatrix=mat3(transpose(inverse(view*model)));
+	vs_out.Normal=normalMatrix*aNormal;
+	gl_Position=view*model*vec4(aPos,1.0f);
 }

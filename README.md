@@ -11,6 +11,4 @@ Follow the tutorial 《LearnOpenGL》 and do some exercises.
 - In GLSL, `struct`  is quite different from `block`. The **block name** should be the same in the next shader, but the **instance name** in the current shader can be anything we like. As long as both interface block name are equal, their corresponding input and output is matched together.`gl_in[]` is the GLSL **built-in** variables. Don't  confuse it with another user-defined name.  
 - **Geometry shader input varying variable must be declared as an array.**
 - (?) I have one question in [Exploding objects](https://learnopengl.com/Advanced-OpenGL/Geometry-Shader), Joey used the cross-product to calculate the face normal, but the order of the two vectors he used will produce a direction vector pointing to the inside. But the final effect proved to be correct. I just can't understand that.
-- *I spent two days trying to understand Gamma-Correction, but failed. Maybe I should learn it after I know more about image processing.*
 
-- **I've been stucked in Shadow Mapping(real-time) for one week, then I decide to learn related lessons in Games202 for a while.——20.6.5**
