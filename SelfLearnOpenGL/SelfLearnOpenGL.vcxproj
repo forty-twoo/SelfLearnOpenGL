@@ -164,6 +164,8 @@
     <None Include="geometry_shader.gs" />
     <None Include="geometry_shader.vs" />
     <None Include="green.fs" />
+    <None Include="instancing.fs" />
+    <None Include="instancing.vs" />
     <None Include="light_source.fs" />
     <None Include="light_source.vs" />
     <None Include="cube_object.fs" />
