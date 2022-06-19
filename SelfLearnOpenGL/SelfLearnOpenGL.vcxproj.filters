@@ -103,5 +103,11 @@
     <None Include="instancing.fs">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="advanced_lighting.vs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="advanced_lighting.fs">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

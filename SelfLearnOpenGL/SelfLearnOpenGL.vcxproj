@@ -156,6 +156,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="advanced_glsl.vs" />
+    <None Include="advanced_lighting.vs" />
+    <None Include="advanced_lighting.fs" />
     <None Include="cubemaps.fs" />
     <None Include="cubemaps.vs" />
     <None Include="default.fs" />
