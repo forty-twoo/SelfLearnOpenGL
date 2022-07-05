@@ -109,5 +109,23 @@
     <None Include="advanced_lighting.fs">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="shadow_mapping.vs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shadow_mapping.fs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shadow_mapping_depth.vs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shadow_mapping_depth.fs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="debug_quad.vs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="debug_quad.fs">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

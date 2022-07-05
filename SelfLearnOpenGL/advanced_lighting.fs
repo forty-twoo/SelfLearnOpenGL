@@ -29,13 +29,11 @@ void main()
     if(blinn)
     {
         vec3 halfwayDir = normalize(lightDir + viewDir);  
-        spec = pow(max(dot(normal, halfwayDir), 0.0), 32.0);
-    }
-    else
-    {
+        spec = pow(max(dot(normal, halfwayDir), 0.0), 1.0);
+    }else{
         vec3 reflectDir = reflect(-lightDir, normal);
-        spec = pow(max(dot(viewDir, reflectDir), 0.0), 8.0);
+        spec = pow(max(dot(viewDir, reflectDir), 0.0), 1.0);
     }
     vec3 specular = vec3(0.3) * spec; // assuming bright white light color
-    FragColor = vec4(ambient + diffuse + specular, 1.0);
+    FragColor = vec4( diffuse + specular, 1.0);
 }
