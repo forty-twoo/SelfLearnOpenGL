@@ -15,12 +15,26 @@ uniform sampler2D shadowMap;
 uniform vec3 lightPos;
 uniform vec3 viewPos;
 
-float ShadowCalculation(vec4 fragPosInLightSpace){
+float ShadowCalculation(vec4 fragPosInLightSpace,vec3 lightDir,vec3 normal){
+
 	vec3 projCoords=fragPosInLightSpace.xyz/fragPosInLightSpace.w;
-	projCoords=projCoords*0.5+0.5;
+	projCoords=projCoords*0.5+0.5f;
 	float closetDepth=texture(shadowMap,projCoords.xy).r;
 	float currentDepth=projCoords.z;
-	float shadow=closetDepth>currentDepth?0.0f:1.0f;
+	float bias=max(0.005,0.05*(1.0f-dot(lightDir,normal)));
+	float shadow=0.0;
+
+	vec2 texelSize=1.0/textureSize(shadowMap,0);
+	for(int x=-1;x<=1;++x){
+		for(int y=-1;y<=1;++y){
+			float pcfDepth=texture(shadowMap,projCoords.xy+vec2(x,y)*texelSize).r;
+			shadow+=currentDepth>(pcfDepth+bias)?1.0:0.0;
+		}
+	}
+	shadow/=9.0f;
+	
+	if(projCoords.z>1.0f)
+		shadow=0.0;
 	return shadow;
 }
 
@@ -41,7 +55,7 @@ void main()
 	spec=pow(max(dot(halfDir,normal),0.0f),64.0);
 	vec3 specular=spec*lightColor;
 
-	float shadow=ShadowCalculation(fs_in.fragPosInLightSpace);
+	float shadow=ShadowCalculation(fs_in.fragPosInLightSpace,lightDir,normal);
 	vec3 lighting=ambient+(1.0f-shadow)*(diffuse+specular);
 	FragColor=vec4(lighting*color,1.0f);
 }
