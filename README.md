@@ -1,7 +1,7 @@
 # SelfLearnOpenGL
 Follow the tutorial 《LearnOpenGL》 and do some exercises.
 
-### Hints for me
+### My notes and thoughts
 
 - The output of the vertex shader requires the coordinates to be in clip-space.
 - Your NDC coordinates will then be transformed to screen-space coordinates via the viewport transform using the data you provided with glViewport. **The resulting screen-space coordinates are then transformed to fragments as inputs to your fragment shader.**
@@ -18,3 +18,4 @@ Follow the tutorial 《LearnOpenGL》 and do some exercises.
 - When using shadow map, the acne caused by **Self-Occlusion** is due to the light direction which is not parallel to the surface normal and the limited resolution of the shadow map you use.
 - **A framebuffer object is not complete without a color buffer**, so if we don't use it we need to explicitly tell OpenGL we're not going to render any color data. We do this by setting both the read and draw buffer to GL_NONE with glDrawBuffer and glReadbuffer.
 - In framebuffer, the texture attachment is roughly the same as usual situations, the main differences is that we set the dimensions equal to the screen size(but this is not required) and **we pass NULL as the texture's data parameter which means we only allocating the memory and not actually filling data to it.**
+- (?)A weired bug, I bind the shadowMap instead of shadowMapFBO to the binding point by accident, then I bind back the default framebuffer(0) before rendering, After the render loop, (the code in the loop is just to present a red color or anything you like, but not using the wrong framebuffer), the screen is all black which is weird because I bind the correct default framebuffer back.
