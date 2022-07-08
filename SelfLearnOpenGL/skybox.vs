@@ -10,5 +10,5 @@ void main()
 {
     TexCoords = vec3(aPos.x,aPos.y,aPos.z);
     vec4 glPostion=projection*view*vec4(aPos,1.0f);
-    gl_Position=glPostion.xyww;
+    gl_Position=glPostion;
 }  
