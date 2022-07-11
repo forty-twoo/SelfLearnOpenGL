@@ -1,10 +1,11 @@
 # SelfLearnOpenGL
 Follow the tutorial 《LearnOpenGL》 and do some exercises.
 
-### My notes and thoughts
+### My notes and thoughts after reading the book
 
-- The output of the vertex shader requires the coordinates to be in clip-space.
 - Your NDC coordinates will then be transformed to screen-space coordinates via the viewport transform using the data you provided with glViewport. **The resulting screen-space coordinates are then transformed to fragments as inputs to your fragment shader.**
+- 
+  **gl_FragCoord VS FragPos**: they are quite different concepts, don't confuse with it.`gl_FragCoord` is a built-in variable in shader while `FragPos` is just a user-defined variable. The x and y components of gl_FragCoord represent the fragment's screen-space coordinates (with (0,0) being the bottom-left corner). The gl_FragCoord variable also contains a z-component which contains the depth value of the fragment. This z value is the value that is compared to the depth buffer's content.
 - When we output a clip-space vertex position to gl_Position in the vertex shader, OpenGL automatically does a perspective divide **e.g. transform clip-space coordinates in the range [-w,w] to [-1,1] by dividing the x,y,z component by the vector's w component.**
 - when you draw more than one objects, in order to make the normal vectors keep pointing at the right direction after the transformations, **you need to modify the normal matrix in the drawing loop every time you draw an object for the model matrix may change**, another solution is to calculate the normal matrix in vertex shader, but it will be slower.
 - **Cubemap**: OpenGL treats it like an unit box, if you don't use any fancy instructions you will see that the rendering result is a small box. You have  to disable depth test when draw cubemap as skybox, because cubemap is so tiny and much closer to the camera compared to other objects. And remember cubemap is a 3D texture which needs three dimension coordinates to identify. 
