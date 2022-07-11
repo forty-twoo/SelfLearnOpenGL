@@ -25,25 +25,25 @@ Follow the tutorial 《LearnOpenGL》 and do some exercises.
 
     - **We can transform the non-linear depth values of the fragment back to  its linear values. This means we have to first re-transform the depth values from the range `[0,1]` to normalized device coordinates in the range `[-1,1]`. Then we want to reverse the non-linear equation as done in the projection matrix and apply this inversed equation to the resulting depth value. The result is then a linear depth value.**
 
-             ```c
-             #version 330 core
-             out vec4 FragColor;
-             
-             float near = 0.1; 
-             float far  = 100.0; 
-               
-             float LinearizeDepth(float depth) 
-             {
-                 float z = depth * 2.0 - 1.0; // back to NDC 
-                 return (2.0 * near * far) / (far + near - z * (far - near));	
-             }
-             
-             void main()
-             {             
-                 float depth = LinearizeDepth(gl_FragCoord.z) / far; // divide by far for demonstration
-                 FragColor = vec4(vec3(depth), 1.0);
-             }
-             ```
+        ```
+        #version 330 core
+        out vec4 FragColor;
+        
+        float near = 0.1; 
+        float far  = 100.0; 
+          
+        float LinearizeDepth(float depth) 
+        {
+            float z = depth * 2.0 - 1.0; // back to NDC 
+            return (2.0 * near * far) / (far + near - z * (far - near));	
+        }
+        
+        void main()
+        {             
+            float depth = LinearizeDepth(gl_FragCoord.z) / far; // divide by far for demonstration
+            FragColor = vec4(vec3(depth), 1.0);
+        }
+        ```
 
         
 
