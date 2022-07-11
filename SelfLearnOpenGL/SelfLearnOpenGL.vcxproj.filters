@@ -127,5 +127,7 @@
     <None Include="debug_quad.fs">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="depth_testing.vs" />
+    <None Include="depth_testing.fs" />
   </ItemGroup>
 </Project>
