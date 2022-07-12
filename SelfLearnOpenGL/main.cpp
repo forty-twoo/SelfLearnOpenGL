@@ -21,8 +21,8 @@ void renderScene(const Shader& shader);
 void renderCube();
 
 // settings
-const unsigned int SCR_WIDTH = 2000;
-const unsigned int SCR_HEIGHT =1500;
+const unsigned int SCR_WIDTH = 1600;
+const unsigned int SCR_HEIGHT =1200;
 bool shadows = true;
 bool shadowsKeyPressed = false;
 

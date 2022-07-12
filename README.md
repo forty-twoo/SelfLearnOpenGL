@@ -64,3 +64,5 @@ Follow the tutorial 《LearnOpenGL》 and do some exercises.
 - In chapter Shadow_Mapping, the **Over Sampling** part, there are two reasons to produce the redundant shadows in the floor:
     -  1.Suppose a fragment of the floor has x/y coordinates in LightSpace beyond [0,1], the depth value it will sample depends on the ShadowMap wrapping method. So we could solve the problem with setting the wrapping method to GL_CLAMP_BORDER, and then make the border depth value 1.0; 
     -  2.Apart from x/y coordinates, the z coordinate in LightSpace might as well beyond [0,1] which means the fragment is outside the far-plane of the light's orthographic frustum. It's z value is always larger than 1.0 so our code will treat this fragment as it's in shadow and the wrapping method doesn't work for this situation. We can force the shadow value to 0.0 whenever the projected vector's z coordinate is larger than 1.0.
+
+- **GL_DEPTH_ATTACHMENT**: This attachment point can only have images with depth formats bound to it. The image attached becomes the Depth Buffer for the FBO. Note that if no depth image is attached, Depth Testing will be disabled when rendering to this FBO.
