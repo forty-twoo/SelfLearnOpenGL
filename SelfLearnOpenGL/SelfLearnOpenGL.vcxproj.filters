@@ -127,5 +127,10 @@
     <None Include="debug_quad.fs">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="point_shadow.vs" />
+    <None Include="point_shadow.fs" />
+    <None Include="point_shadow_depth.vs" />
+    <None Include="point_shadow_depth.fs" />
+    <None Include="point_shadow_depth.gs" />
   </ItemGroup>
 </Project>
