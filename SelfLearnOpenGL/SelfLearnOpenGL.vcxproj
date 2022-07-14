@@ -176,6 +176,8 @@
     <None Include="cube_object.vs" />
     <None Include="model_loading.fs" />
     <None Include="model_loading.vs" />
+    <None Include="normal_mapping.fs" />
+    <None Include="normal_mapping.vs" />
     <None Include="point_shadow.fs" />
     <None Include="point_shadow.vs" />
     <None Include="point_shadow_depth.fs" />

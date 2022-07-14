@@ -132,5 +132,7 @@
     <None Include="point_shadow_depth.vs" />
     <None Include="point_shadow_depth.fs" />
     <None Include="point_shadow_depth.gs" />
+    <None Include="normal_mapping.vs" />
+    <None Include="normal_mapping.fs" />
   </ItemGroup>
 </Project>
