@@ -48,21 +48,37 @@ Follow the tutorial 《LearnOpenGL》 and do some exercises.
         
 
 - when you draw more than one objects, in order to make the normal vectors keep pointing at the right direction after the transformations, **you need to modify the normal matrix in the drawing loop every time you draw an object for the model matrix may change**, another solution is to calculate the normal matrix in vertex shader, but it will be slower.
+
 - **Cubemap**: OpenGL treats it like an unit box, if you don't use any fancy instructions you will see that the rendering result is a small box. You have  to disable depth test when draw cubemap as skybox, because cubemap is so tiny and much closer to the camera compared to other objects. And remember cubemap is a 3D texture which needs three dimension coordinates to identify. 
+
 - <img src="https://raw.githubusercontent.com/forty-twoo/SelfLearnOpenGL/master/images/CubeMap.png" width="500">
+
 - **Uniform Buffer Object**: If you have some uniform variables which won't change between several shaders, you can define them as uniform buffer object and only need to set them **once** in the OpenGL code. The way to use Uniform buffer object is a little different because you have to allocate the binding point which is a number  to every ubo. The binding points connect the shader and the ubo in GPU. One uniform buffer object can contain several variables so the function `glBufferSubData` will be used to copy the actual data to the buffer for it can define the exact offsets.
+
 - In GLSL, `struct`  is quite different from `block`. The **block name** should be the same in the next shader, but the **instance name** in the current shader can be anything we like. As long as both interface block name are equal, their corresponding input and output is matched together.`gl_in[]` is the GLSL **built-in** variables. Don't  confuse it with another user-defined name.  
+
 - **Geometry shader input varying variable must be declared as an array.**
+
 - (?) I have one question in [Exploding objects](https://learnopengl.com/Advanced-OpenGL/Geometry-Shader), Joey used the cross-product to calculate the face normal, but the order of the two vectors he used will produce a direction vector pointing to the inside. But the final effect proved to be correct. I just can't understand that.
+
 - A mesh contains several faces.**A Face represents a render primitive of the object(triangles,squares,points).** A face contains the indices of the vertices that form a primitive.
-- The tangent space system will most likely vary for any two faces.
+
 - Still don't understand Gamma-correction.
+
 - When using shadow map, the acne caused by **Self-Occlusion** is due to the light direction which is not parallel to the surface normal and the limited resolution of the shadow map you use.
+
 - **A framebuffer object is not complete without a color buffer**, so if we don't use it we need to explicitly tell OpenGL we're not going to render any color data. We do this by setting both the read and draw buffer to GL_NONE with glDrawBuffer and glReadbuffer.
+
 - In framebuffer, the texture attachment is roughly the same as usual situations, the main differences is that we set the dimensions equal to the screen size(but this is not required) and **we pass NULL as the texture's data parameter which means we only allocating the memory and not actually filling data to it.**
+
 - (?)A weired bug, I bind the shadowMap instead of shadowMapFBO to the binding point by accident, then I bind back the default framebuffer(0) before rendering, After the render loop, (the code in the loop is just to present a red color or anything you like, but not using the wrong framebuffer), the screen is all black which is weird because I bind the correct default framebuffer back.
+
 - In chapter Shadow_Mapping, the **Over Sampling** part, there are two reasons to produce the redundant shadows in the floor:
     -  1.Suppose a fragment of the floor has x/y coordinates in LightSpace beyond [0,1], the depth value it will sample depends on the ShadowMap wrapping method. So we could solve the problem with setting the wrapping method to GL_CLAMP_BORDER, and then make the border depth value 1.0; 
     -  2.Apart from x/y coordinates, the z coordinate in LightSpace might as well beyond [0,1] which means the fragment is outside the far-plane of the light's orthographic frustum. It's z value is always larger than 1.0 so our code will treat this fragment as it's in shadow and the wrapping method doesn't work for this situation. We can force the shadow value to 0.0 whenever the projected vector's z coordinate is larger than 1.0.
 
 - **GL_DEPTH_ATTACHMENT**: This attachment point can only have images with depth formats bound to it. The image attached becomes the Depth Buffer for the FBO. Note that if no depth image is attached, Depth Testing will be disabled when rendering to this FBO.
+
+- **Normal mapping**: In a normal map, the normal vectors are closely pointing outwards towards the positive z-axis (0,0,1), so the map has a blue-ish tint. In a tangent space normal map, the situation is the same: Normal vectors in a normal map are expressed in tangent space where normals always point roughly in the positive z direction. Tangent space is a space that's local to the surface of a triangle: the normals are relative to the local reference frame of the individual triangles.  So **the tangent space system will most likely vary for any two faces.**  And we will use the surface normal in object local space directly as the tangent space normal. As for the Tangent vector and the Bitangent vector,  there is a convention that we use the directions the textures coordinates expand.
+
+- One disadvantage of normal map is that the details of the image you render still seems quite flat. e.g. you can't make your picture look like there's  a huge mountain range coming out of it if you only use normal map. But by using Parallax mapping you can achieve this goal.
